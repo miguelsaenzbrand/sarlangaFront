@@ -1,0 +1,128 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-md-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando...</strong>
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <span>Aguarde por favor</span>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row animated fadeIn">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <input #input (keyup)="buscarTickets(input.value)" type="text" class="form-control" placeholder="Buscar ticket">
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="card-title">Listado y soporte de tickets</h4>
+            <h6 class="card-subtitle">Listado de tickets abiertos por los usuarios</h6>
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-2">
+            <button [routerLink]="['/ticket', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-info">
+              <i class="fa fa-plus"></i> Crear ticket
+            </button>
+          </div>
+        </div>
+        <div class="row m-t-40">
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card">
+              <div class="box bg-info text-center">
+                <h1 class="font-light text-white">{{_ticketService.totaltickets}}</h1>
+                <h6 class="text-white">Tickets totales</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card">
+              <div class="box bg-primary text-center">
+                <h1 class="font-light text-white">{{nuevo}}</h1>
+                <h6 class="text-white">Nuevos</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card">
+              <div class="box bg-success text-center">
+                <h1 class="font-light text-white">{{cerrado}}</h1>
+                <h6 class="text-white">Resueltos</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+          <div class="col-md-6 col-lg-3 col-xlg-3">
+            <div class="card">
+              <div class="box bg-dark text-center">
+                <h1 class="font-light text-white">{{pendiente}}</h1>
+                <h6 class="text-white">Pendientes</h6>
+              </div>
+            </div>
+          </div>
+          <!-- Column -->
+        </div>
+        <div class="table-responsive">
+          <table id="demo-foo-addrow" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
+            <thead>
+              <tr>
+                <th>ID #</th>
+                <th>Abierto por</th>
+                <th>Incidencia</th>
+                <th>Estado</th>
+                <th>Prioridad</th>
+                <th>Asignado a</th>
+                <th>Fecha alta</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of tickets; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>
+                  <img [src]="ticket.usuario.img | imagen" alt="user" class="img-circle" /> {{ticket.usuario.nombre}}
+                </td>
+                <td>{{ticket.incidencia}}</td>
+                <td>
+                  <span [ngClass]="{ 'label-primary': ticket.estado == 'nuevo', 'label-success': ticket.estado == 'cerrado', 'label-inverse': ticket.estado == 'pendiente'}"
+                    class="label">{{ticket.estado}}</span>
+                </td>
+                <td>
+                  <span [ngClass]="{'label-success': ticket.prioridad === 'muybaja',
+                  'label-info': ticket.prioridad === 'baja',
+                  'label-primary': ticket.prioridad === 'media',
+                  'label-warning': ticket.prioridad === 'alta',
+                  'label-danger': ticket.prioridad === 'urgente' }" class="label">{{ticket.prioridad}}</span>
+                </td>
+                <td>
+                  <img [src]="ticket.asignado.img | imagen" alt="user" class="img-circle" /> {{ticket.asignado.nombre}}
+                </td>
+                <td>{{ticket.creado | date: 'EEE, MMM d, y, HH:mm'}}</td>
+                <td>
+                  <span [routerLink]="['/ticket', ticket._id]" class="pointer">
+                    <i class="mdi mdi-pencil-box-outline acciones"></i>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button (click)="cambiarDesde(-5)" class="btn waves-effect waves-light btn-sm btn-secondary">Anterior</button>
+          <button (click)="cambiarDesde(5)" class="btn waves-effect waves-light btn-sm btn-secondary">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

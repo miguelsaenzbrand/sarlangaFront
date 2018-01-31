@@ -1,0 +1,215 @@
+<div class="row animated fadeIn">
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block">
+              <div class="m-r-20 align-self-center">
+                <span class="lstick m-r-20"></span>
+                <img src="./assets/images/icon/staff.png" alt="Income" />
+              </div>
+              <div class="align-self-center">
+                <h6 class="text-muted m-t-10 m-b-0">Usuarios</h6>
+                <h2 class="m-t-0">{{totalUsuarios}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block">
+              <div class="m-r-20 align-self-center">
+                <span class="lstick m-r-20"></span>
+                <img src="./assets/images/icon/expense.png" alt="Income" />
+              </div>
+              <div class="align-self-center">
+                <h6 class="text-muted m-t-10 m-b-0">Items</h6>
+                <h2 class="m-t-0">{{totalItems}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block">
+              <div class="m-r-20 align-self-center">
+                <span class="lstick m-r-20"></span>
+                <img src="./assets/images/icon/income.png" alt="Income" />
+              </div>
+              <div class="align-self-center">
+                <h6 class="text-muted m-t-10 m-b-0">Tickets</h6>
+                <h2 class="m-t-0">{{totalTickets}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block">
+              <div class="m-r-20 align-self-center">
+                <span class="lstick m-r-20"></span>
+                <img src="./assets/images/icon/assets.png" alt="Income" />
+              </div>
+              <div class="align-self-center">
+                <h6 class="text-muted m-t-10 m-b-0">Coberturas</h6>
+                <h2 class="m-t-0">{{totalCoberturas}}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-xlg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex no-block">
+              <h4 class="card-title">
+                <span class="lstick"></span>Actividad reciente</h4>
+            </div>
+          </div>
+          <div class="activity-box">
+            <!-- Actividad cobertura -->
+            <div class="date-devider">
+              <span>Cobertura</span>
+            </div>
+            <div class="card-body">
+              <!-- Activity item-->
+              <div class="activity-item" *ngFor="let cobertura of coberturas">
+                <div class="round m-r-20">
+                  <img [src]="cobertura.usuario.img | imagen" alt="user" width="50" />
+                </div>
+                <div class="m-t-10">
+                  <h5 class="m-b-0 font-medium">{{cobertura.title}}
+                    <span class="text-muted font-14 m-l-10">| &nbsp; {{cobertura.creada | date: 'EEE, MMM d, y, HH:mm'}}</span>
+                  </h5>
+                  <h6 class="text-muted mt-1">Fecha y horario de salida {{cobertura.start | date: 'EEE, MMM d, y, HH:mm'}}</h6>
+                  <h6 class="text-muted">Equipo </h6>
+                  <span class="image-list m-t-10">
+                    <img [src]="cobertura.conductor.img | imagen" class="img-circle equipo" alt="user" width="40">
+                    <img [src]="cobertura.camarografo.img | imagen" class="img-circle equipo" alt="user" width="40">
+                    <img [src]="cobertura.redactor.img | imagen" class="img-circle equipo" alt="user" width="40">
+                    <img [src]="cobertura.productor.img | imagen" class="img-circle equipo" alt="user" width="40">
+                    <a [routerLink]="['/cobertura', cobertura._id]">+Info</a>
+                  </span>
+                </div>
+              </div>
+              <!-- Activity item-->
+            </div>
+            <!-- Actividad cobertura -->
+            <!-- Actividad Tickets -->
+            <div class="date-devider">
+              <span>Ticket</span>
+            </div>
+            <div class="card-body">
+              <!-- Activity item-->
+              <div class="activity-item" *ngFor="let ticket of tickets">
+                <div class="round m-r-20">
+                  <img [src]="ticket.usuario.img | imagen" alt="user" width="50" />
+                </div>
+                <div class="m-t-10">
+                  <h5 class="m-b-0 font-medium">{{ticket.usuario.nombre}}
+                    <span class="text-muted font-14 m-l-10">| &nbsp; {{ticket.creado | date: 'EEE, MMM d, y, HH:mm'}}</span>
+                  </h5>
+                  <h6 class="text-muted">{{ticket.incidencia}} | &nbsp;
+                    <span class="text-capitalize">{{ticket.prioridad }}</span>
+                  </h6>
+                  <table class="table vm b-0 m-b-0">
+                    <tr>
+                      <td class="m-r-10 b-0">
+                        <img [src]="ticket.asignado.img | imagen" class="img-circle" alt="user" width="40" />
+                      </td>
+                      <td class="b-0">
+                        <h5 class="m-b-0 font-medium ">Asignado
+                          <span class="text-muted font-14 m-l-10">| &nbsp; {{ticket.asignado.nombre}}</span>
+                        </h5>
+
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <!-- Activity item-->
+            </div>
+            <!-- Actividad Tickets -->
+            <!-- Actividad Items -->
+            <div class="date-devider">
+              <span>Inventario</span>
+            </div>
+            <div class="card-body">
+              <!-- Activity item-->
+              <div class="activity-item" *ngFor="let item of items">
+                <div class="round m-r-20">
+                  <img [src]="item.usuario.img | imagen" alt="user" width="50">
+                </div>
+                <div class="m-t-10">
+                  <h5 class="m-b-0 font-medium">{{item.usuario.nombre}}
+                    <span class="text-muted font-14 m-l-10">| &nbsp; {{item.creado | date: 'EEE, MMM d, y, HH:mm'}}</span>
+                  </h5>
+                  <h6 class="text-muted">{{item.nombre}} </h6>
+                  <span>
+                    <img [src]="item.img | imagen:'item'" alt="user" width="60">
+                  </span>
+                </div>
+              </div>
+              <!-- Activity item-->
+            </div>
+            <!-- Actividad Items -->
+            <!-- Actividad Items -->
+            <div class="date-devider">
+              <span>Usuario</span>
+            </div>
+            <div class="card-body">
+              <!-- Activity item-->
+              <div class="activity-item" *ngFor="let usuario of usuarios">
+                <div class="round m-r-20">
+                  <img [src]="usuario.img | imagen" alt="user" width="50">
+                </div>
+                <div class="m-t-10">
+                  <h5 class="m-b-0 font-medium">{{usuario.nombre}}
+                    <span class="text-muted font-14 m-l-10">| &nbsp; {{usuario.creado | date: 'EEE, MMM d, y, HH:mm'}}</span>
+                  </h5>
+                  <h6 class="text-muted text-capitalize">{{usuario.area}} </h6>
+                </div>
+              </div>
+              <!-- Activity item-->
+            </div>
+            <!-- Actividad Items -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <aside class="right-side-panel">
+      <div class="row">
+        <!-- Weather Widget -->
+        <div class="col-md-12 m-t-10">
+          <h5 class="text-muted m-b-0">{{ciudad}}</h5>
+          <hr>
+          <h3>{{fecha | date: 'EEE, MMM d, y, HH:mm'}}</h3>
+          <div class="d-flex m-t-20">
+            <div class="display-5 text-info">
+              <i class="wi" [ngClass]="iconoClima"></i>
+            </div>
+            <div class="m-l-20">
+              <h2 class="m-b-0">{{temperatura}}
+                <i class="wi wi-celsius"></i>
+              </h2>
+              <h6>{{tiempo}}</h6>
+            </div>
+          </div>
+        </div>
+        <!-- End Weather Widget -->
+        <!-- Message Widget -->
+      </div>
+    </aside>
+  </div>
+</div>

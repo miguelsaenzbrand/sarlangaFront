@@ -1,0 +1,98 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-md-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando...</strong>
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <span>Aguarde por favor</span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex no-block">
+          <div class="m-r-20 align-self-center">
+            <span class="lstick m-r-20"></span>
+            <img src="../assets/images/icon/expense.png" alt="Items">
+          </div>
+          <div class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Total Items</h6>
+            <h2 class="m-t-0">{{_itemService.totalItems}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <input #input (keyup)="buscarItems(input.value)" type="text" class="form-control" placeholder="Buscar item">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!cargando">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">
+          <button [routerLink]="['/item', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-info">
+            <i class="fa fa-plus"></i> Crear item
+          </button>
+        </div>
+        <div class="d-flex">
+          <div>
+            <h4 class="card-title">
+              <span class="lstick"></span>Item</h4>
+          </div>
+        </div>
+        <div class="table-responsive m-t-20 no-wrap">
+          <table class="table vm no-th-brd pro-of-month">
+            <thead>
+              <tr>
+                <th colspan="2">Item</th>
+                <th>Modelo</th>
+                <th>Numero de serie</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+                <th>Fecha creado</th>
+                <th>Observaciones</th>
+                <th>Patrimonio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items">
+                <span class="pointer">
+                  <img (click)="mostrarModalUpload(item._id)" [src]="item.img | imagen: 'item'" alt="item.nombre" width="50">
+                </span>
+                <td>
+                  <h6>{{item.nombre}}</h6>
+                  <small class="text-muted">{{item.marca}}</small>
+                </td>
+                <td>{{item.modelo}}</td>
+                <td>{{item.numeroserie}}</td>
+                <td>{{item.descripcion}}</td>
+                <td>{{item.estado}}</td>
+                <td>{{item.creado | date: 'EEE, MMM d, y, HH:mm'}}</td>
+                <td>{{item.observaciones}}</td>
+                <td>{{item.patrimonio}}</td>
+                <td>
+                  <span [routerLink]="['/item', item._id]" class="pointer">
+                    <i class="mdi mdi-pencil-box-outline acciones"></i>
+                  </span>
+                  <span (click)="borrarItem(item)" class="pointer">
+                    <i class="mdi mdi-delete acciones"></i>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button (click)="cambiarDesde(-5)" class="btn waves-effect waves-light btn-sm btn-secondary">Anterior</button>
+          <button (click)="cambiarDesde(5)" class="btn waves-effect waves-light btn-sm btn-secondary">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

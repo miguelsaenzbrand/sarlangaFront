@@ -1,0 +1,55 @@
+<div class="row animated fadeIn">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="card-title">Calendario</h4>
+            <h6 class="card-subtitle">Calendario de coberturas</h6>
+          </div>
+          <div class="col-md-6"></div>
+          <div class="col-md-2">
+            <button [routerLink]="['/cobertura', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-info">
+              <i class="fa fa-plus"></i> Crear cobertura
+            </button>
+          </div>
+        </div>
+        <div class="row m-t-10">
+          <div class="col-md-12">
+            <angular2-fullcalendar [options]="calendarOptions"></angular2-fullcalendar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="modal-body">
+            <p class="card-text" id="start"></p>
+            <p class="card-text" id="end"></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm waves-effect waves-light btn-inverse" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-sm waves-effect waves-light btn-info">
+          <a id="eventUrl">Editar</a>
+        </button>
+        <button type="button" class="btn btn-sm waves-effect waves-light btn-danger">Eliminar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

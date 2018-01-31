@@ -1,0 +1,93 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-md-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando...</strong>
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <span>Aguarde por favor</span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex no-block">
+          <div class="m-r-20 align-self-center">
+            <span class="lstick m-r-20"></span>
+            <img src="../assets/images/icon/staff.png" alt="Usuarios">
+          </div>
+          <div class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Total Usuarios</h6>
+            <h2 class="m-t-0">{{totalRegistros}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <input #input (keyup)="buscarUsuarios(input.value)" type="text" class="form-control" placeholder="Buscar usuario">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!cargando">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex">
+          <div>
+            <h4 class="card-title">
+              <span class="lstick"></span>Usuarios</h4>
+          </div>
+        </div>
+        <div class="table-responsive m-t-20 no-wrap">
+          <table class="table vm no-th-brd pro-of-month">
+            <thead>
+              <tr>
+                <th colspan="2">Usuario</th>
+                <th>Correo</th>
+                <th>Role</th>
+                <th>Auth</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarios">
+                <span class="round pointer">
+                  <img (click)="mostrarModal(usuario._id)" [src]="usuario.img | imagen" alt="usuario.nombre" width="50">
+                </span>
+                <td>
+                  <h6>{{usuario.nombre}}</h6>
+                  <small class="text-muted">Web Designer</small>
+                </td>
+                <td>{{usuario.email}}</td>
+                <td>
+                  <select [(ngModel)]="usuario.role" name="role" class="form-material form-control">
+                    <option value="ADMIN_ROLE">Administrador</option>
+                    <option value="USER_ROLE">Normal</option>
+                  </select>
+                </td>
+                <td>
+                  <label *ngIf="usuario.google" class="label label-danger label-rounded">Google</label>
+                  <label *ngIf="!usuario.google" class="label label-info label-rounded">Normal</label>
+                </td>
+                <td>
+                  <span (click)="guardarUsuario(usuario)" class="pointer">
+                    <i class="mdi mdi-account-edit acciones"></i>
+                  </span>
+                  <span (click)="borrarUsuario(usuario)" class="pointer">
+                    <i class="mdi mdi-account-remove acciones"></i>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button (click)="cambiarDesde(-5)" class="btn waves-effect waves-light btn-sm btn-secondary">Anterior</button>
+          <button (click)="cambiarDesde(5)" class="btn waves-effect waves-light btn-sm btn-secondary">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

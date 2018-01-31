@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Usuarios</h4>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Imagen</th>
+              <th>Nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios; let i = index" [routerLink]="['/usuarios']" class="pointer">
+              <th scope="row">{{i + 1}}</th>
+              <th>
+                <img [src]="usuario.img | imagen" alt="" width="50">
+              </th>
+              <th>{{usuario.nombre}}</th>
+              <th>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-success" *ngIf="usuarios.length == 0">No hay registros</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Items</h4>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Imagen</th>
+              <th>Nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items; let i = index" [routerLink]="['/items', item._id]" class="pointer">
+              <th scope="row">{{i + 1}}</th>
+              <th>
+                <img [src]="item.img | imagen: 'items'" alt="" class="img-circle">
+              </th>
+              <th>{{item.nombre}}</th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-success" *ngIf="items.length == 0">No hay registros</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Tickets</h4>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Estado</th>
+              <th>Prioridad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of tickets; let i = index" [routerLink]="['/ticket', ticket._id]" class="pointer">
+              <th scope="row">{{i + 1}}</th>
+              <th>{{ticket.estado}}</th>
+              <th>{{ticket.prioridad}}</th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-success" *ngIf="tickets.length == 0">No hay registros</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Coberturas</h4>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Título</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cobertura of coberturas" [routerLink]="['/cobertura', cobertura._id]" class="pointer">
+              <th>{{cobertura.titulo}}</th>
+              <th>{{cobertura.fecha}}</th>
+              <th>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-success" *ngIf="coberturas.length == 0">No hay registros</div>
+      </div>
+    </div>
+  </div>
+</div>

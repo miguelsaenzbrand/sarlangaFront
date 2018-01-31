@@ -1,0 +1,196 @@
+<div class="row animated fadeIn">
+  <div class="col-md-8">
+    <form #form="ngForm" ngNativeValidate class="form-material" (ngSubmit)="guardarCobertura(form)">
+      <div class="card">
+        <div class="card-body p-b-0">
+          <h4 class="card-title">Guardar - Actualizar cobertura</h4>
+          <h6 class="card-subtitle">Lo campos marcados con * son requeridos
+          </h6>
+        </div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs customtab" role="tablist">
+          <li class="nav-cobertura">
+            <a class="nav-link active" data-toggle="tab" href="#requerido" role="tab" aria-expanded="true">
+              <span class="hidden-sm-up">
+                <i class="ti-home"></i>
+              </span>
+              <span class="hidden-xs-down">Campos requeridos</span>
+            </a>
+          </li>
+          <li class="nav-cobertura">
+            <a class="nav-link" data-toggle="tab" href="#noRequerido" role="tab" aria-expanded="false">
+              <span class="hidden-sm-up">
+                <i class="ti-user"></i>
+              </span>
+              <span class="hidden-xs-down">Campos no requeridos</span>
+            </a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active animated fadeIn" id="requerido" role="tabpanel" aria-expanded="true">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Color</label>
+                  <select [(ngModel)]="cobertura.className" name="className" class="form-control" required>
+                    <option value="">Seleccione un color</option>
+                    <option value="bg-primary">Primary</option>
+                    <option value="bg-success">Success</option>
+                    <option value="bg-danger">Danger</option>
+                    <option value="bg-warning">Warning</option>
+                    <option value="bg-info">Info</option>
+                    <option value="bg-inverse">Inverse</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Título
+                  </label>
+                  <input [(ngModel)]="cobertura.title" name="title" type="text" class="form-control form-control-line" required>
+                </div>
+                <div class="form-group">
+                  <label>Descripción y observaciones</label>
+                  <textarea [(ngModel)]="cobertura.descripcion" name="descripcion" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Fecha y horario de salida</label>
+                  <input [(ngModel)]="cobertura.start" name="start" class="form-control form-control-line" type="datetime-local" required>
+                </div>
+                <div class="form-group">
+                  <label>Fecha y horario de regreso</label>
+                  <input [(ngModel)]="cobertura.end" name="end" class="form-control form-control-line" type="datetime-local" required>
+                </div>
+                <div class="form-group">
+                  <label>Dirección
+                  </label>
+                  <input [(ngModel)]="cobertura.direccion" name="direccion" type="text" class="form-control form-control-line">
+                </div>
+                <div class="demo-checkbox">
+                  <input (click)="viewSelect('conductor')" name="movilidad" type="checkbox" id="movilidad" class="chk-col-light-blue">
+                  <label for="movilidad">Movilidad</label>
+                </div>
+                <div class="form-group">
+                  <label>Conductor</label>
+                  <select [(ngModel)]="cobertura.conductor" name="conductor" class="form-control" [disabled]="viewCon">
+                    <option value="">Seleccionar usuario</option>
+                    <option *ngFor="let usuario of usuarios" [value]="usuario._id">
+                      {{usuario.nombre}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane animated fadeIn" id="noRequerido" role="tabpanel" aria-expanded="false">
+            <div class="card">
+              <div class="card-body">
+                <div class="demo-checkbox">
+                  <input (click)="viewSelect('camara')" name="camara" type="checkbox" id="camara" class="chk-col-light-blue">
+                  <label for="camara">Camarógrafo</label>
+                  <input (click)="viewSelect('redactores')" name="redactores" type="checkbox" id="redactores" class="chk-col-light-blue">
+                  <label for="redactores">Redactores</label>
+                  <input (click)="viewSelect('productores')" name="productores" type="checkbox" id="productores" class="chk-col-light-blue">
+                  <label for="productores">Productor</label>
+                  <input (click)="viewSelect('fotografia')" name="fotografia" type="checkbox" id="fotografia" class="chk-col-light-blue">
+                  <label for="fotografia">Fotografía</label>
+                </div>
+                <div class="form-group">
+                  <label>Camarógrafo</label>
+                  <select [(ngModel)]="cobertura.camarografo" name="camarografo" class="form-control" [disabled]="viewCam">
+                    <option value="">Seleccionar usuario</option>
+                    <option *ngFor="let usuario of usuarios" [value]="usuario._id">
+                      {{usuario.nombre}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Redactor</label>
+                  <select [(ngModel)]="cobertura.redactor" name="redactor" class="form-control" [disabled]="viewRed">
+                    <option value="">Seleccionar usuario</option>
+                    <option *ngFor="let usuario of usuarios" [value]="usuario._id">
+                      {{usuario.nombre}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Productor</label>
+                  <select [(ngModel)]="cobertura.productor" name="productor" class="form-control" [disabled]="viewProd">
+                    <option value="">Seleccionar usuario</option>
+                    <option *ngFor="let usuario of usuarios" [value]="usuario._id">
+                      {{usuario.nombre}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Insumos</label>
+                  <textarea [(ngModel)]="cobertura.insumos" name="insumos" class="form-control" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success waves-effect waves-light">
+                  <i class="fa fa-save"></i>
+                  Guardar</button>
+                <button routerLink="/coberturas" class="btn btn-inverse waves-effect waves-light">
+                  <i class="fa fa-save"></i>
+                  Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Guía de colores</h4>
+        <div class="table-responsive">
+          <table class="table vm no-th-brd pro-of-month">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>
+                  <span class="label label-primary">Primary</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>
+                  <span class="label label-success">Success</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>
+                  <span class="label label-danger">Danger</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>
+                  <span class="label label-warning">Warning</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>
+                  <span class="label label-info">Info</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">6</th>
+                <td>
+                  <span class="label label-inverse">Inverse</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

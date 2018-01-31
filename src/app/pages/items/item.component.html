@@ -1,0 +1,97 @@
+<div class="row animated fadeIn">
+  <div class="col-md-12">
+    <form ngNativeValidate #form="ngForm" (ngSubmit)="guardarItem(form)" class="form-material">
+      <div class="card">
+        <div class="card-body p-b-0">
+          <h4 class="card-title">Guardar - Actualizar ítem</h4>
+          <h6 class="card-subtitle">Lo campos marcados con * son requeridos
+          </h6>
+        </div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs customtab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#requerido" role="tab" aria-expanded="true">
+              <span class="hidden-sm-up">
+                <i class="ti-home"></i>
+              </span>
+              <span class="hidden-xs-down">Campos requeridos</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#noRequerido" role="tab" aria-expanded="false">
+              <span class="hidden-sm-up">
+                <i class="ti-user"></i>
+              </span>
+              <span class="hidden-xs-down">Campos no requeridos</span>
+            </a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active animated fadeIn" id="requerido" role="tabpanel" aria-expanded="true">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Nombre
+                  </label>
+                  <input [(ngModel)]="item.nombre" name="nombre" type="text" class="form-control form-control-line" required>
+                </div>
+                <div class="form-group">
+                  <label>Descripcion</label>
+                  <textarea [(ngModel)]="item.descripcion" name="descripcion" class="form-control" rows="5" required></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane animated fadeIn" id="noRequerido" role="tabpanel" aria-expanded="false">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Marca</label>
+                  <input [(ngModel)]="item.marca" name="marca" type="text" class="form-control form-control-line">
+                </div>
+                <div class="form-group">
+                  <label>Modelo</label>
+                  <input [(ngModel)]="item.modelo" name="modelo" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Estado</label>
+                  <select [(ngModel)]="item.estado" name="estado" class="form-control">
+                    <option value="">Seleccione un estado</option>
+                    <option value="disponible">Disponible</option>
+                    <option value="averiado">Averiado</option>
+                    <option value="extraviado">Extraviado</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Numero de serie</label>
+                  <input [(ngModel)]="item.numeroserie" name="numeroserie" type="text" class="form-control">
+                </div>
+
+                <div class="form-group">
+                  <label>Observaciones</label>
+                  <textarea [(ngModel)]="item.observaciones" name="observaciones" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                  <div class="demo-switch-title">Patrimonio</div>
+                  <div class="switch">
+                    <label>
+                      <input [(ngModel)]="item.patrimonio" name="patrimonio" type="checkbox">
+                      <span class="lever switch-col-light-blue"></span>
+                    </label>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-success waves-effect waves-light">
+                  <i class="fa fa-save"></i>
+                  Guardar</button>
+                <button routerLink="/items" class="btn btn-inverse waves-effect waves-light">
+                  <i class="fa fa-save"></i>
+                  Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
